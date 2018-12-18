@@ -5,6 +5,7 @@
  */
 package devsv.tablemodel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List; 
 import javax.swing.JScrollPane;
@@ -34,6 +35,7 @@ public class SocioTableModelTest extends javax.swing.JFrame {
         if(tblSocios == null){
             tblSocios = new JTable();
             tblSocios.setModel(getTableModel());
+            tblSocios.setDefaultRenderer(BigDecimal.class, new MensalidadeCellRenderer());
         }
         return tblSocios;
     }
@@ -52,6 +54,8 @@ public class SocioTableModelTest extends javax.swing.JFrame {
             Socio socio= new Socio();
             socio.setNome("Nome"+ i);
             socio.setEndereco("Endereco"+ i);
+            socio.setAtivo(true);
+            socio.setMensalidade(new BigDecimal(i *10));
             socios.add(socio);
         }
         return socios;

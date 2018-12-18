@@ -5,6 +5,7 @@
  */
 package devsv.tablemodel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -18,9 +19,11 @@ public class SocioTableModel extends AbstractTableModel{
     private List<Socio> linhas;
     private static final int NOME =0;
     private static final int ENDERECO = 1;
+    private static final int ATIVO = 2;
+    private static final int MENSALIDADE = 3;
      
     //Array com os nomes das colunas.
-    private String[] colunas = new String[] {"Nome", "Endereco"};
+    private String[] colunas = new String[] {"Nome", "Endereco","Ativo","Mensalidade"};
             
     //Cria um SocioTableModel sem nenhuma linha
     public SocioTableModel(){
@@ -54,6 +57,10 @@ public class SocioTableModel extends AbstractTableModel{
                 return String.class;
             case ENDERECO:
                 return String.class;
+            case ATIVO:
+                return Boolean.class;
+            case MENSALIDADE:
+                return BigDecimal.class;
             default:
                 //Não deve ocorrer, pois só existem 2 colunas
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -62,7 +69,7 @@ public class SocioTableModel extends AbstractTableModel{
     
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex){
-        return false;
+        return columnIndex == ATIVO;
     }
     
     @Override
@@ -75,6 +82,10 @@ public class SocioTableModel extends AbstractTableModel{
                 return socio.getNome();
             case ENDERECO:
                 return socio.getEndereco();
+            case ATIVO:
+                return socio.isAtivo();
+            case MENSALIDADE:
+                return socio.getMensalidade();
             default:
                 throw new IndexOutOfBoundsException("column index out of bounds");
                 
@@ -93,6 +104,9 @@ public class SocioTableModel extends AbstractTableModel{
                 break;
             case ENDERECO:
                 socio.setEndereco((String) aValue);
+                break;
+            case ATIVO:
+                socio.setAtivo((Boolean) aValue);
                 break;
             default:
                 throw new IndexOutOfBoundsException("column index out of bounds");
