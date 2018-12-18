@@ -13,6 +13,8 @@ public class Main {
 
     
     public static void main(String[] args) {
+        SocioTableModelTest myFrame = new SocioTableModelTest();
+        myFrame.setVisible(true); 
         
     }
     

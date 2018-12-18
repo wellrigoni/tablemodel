@@ -126,5 +126,28 @@ public class SocioTableModel extends AbstractTableModel{
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
     
+    //Adciona uma lista de socios no final da lista
+    public void addListaDeSocios(List<Socio> socios){
+        //Pega o tamanho antigo da tabela, que servira como 
+        //indice para o primeiro dos novos registros
+        int indice = getRowCount();
+        
+        //Adciona os registros
+        linhas.addAll(socios);
+        
+        //Notifica a mudança
+        fireTableRowsInserted(indice, indice + socios.size());
+    }
+    
+    //Remove todos os registros 
+    public void limpar(){
+        //Remove todos os elementos da lista
+        linhas.clear();
+        
+        //Notifica a mudança
+        fireTableDataChanged();
+    }
+    
+    
     
 }
